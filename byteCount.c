@@ -7,7 +7,7 @@ void charcount(char data[]){
     for(int i=0;i<len;i++){
         frame[i+1]=data[i];
     }
-    printf("character counting:%d",(unsigned char)frame[0]);
+    printf("character counting:%d\n",(unsigned char)frame[0]);
     for (int i = 0; i < strlen(frame); i++)
     {
         printf("%c",frame[i]);
@@ -35,7 +35,7 @@ void bitstuffing(char data[]){
         }
     }
     strcpy(&frame[j],flag);
-    printf("Bit Stuffing:%s",frame);
+    printf("Bit Stuffing:%s\n",frame);
 }
 
 void bytestuffing(char data[]){
@@ -53,7 +53,7 @@ void bytestuffing(char data[]){
     }
     frame[j++]=FLAG;
     frame[j]='\0';
-    printf("Byte Stuffing:%s",frame);
+    printf("Byte Stuffing:%s\n",frame);
 
 }
 
@@ -62,8 +62,8 @@ int main(){
     printf("enter a string:");
     scanf("%s",&data);
     data[strcspn(data,"\n")]='\0';
-    //charcount(data);
+    charcount(data);
     //bitstuffing(data);
-    bytestuffing(data);
+    //bytestuffing(data);
     return 0;
 }
