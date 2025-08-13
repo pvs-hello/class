@@ -1,12 +1,17 @@
 pipeline {
     agent any
     stages {
-        stage('Install dependencies') {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/pvs-hello/class.git'
+            }
+        }
+        stage('Install Dependencies') {
             steps {
                 sh 'pip install -r requirements.txt'
             }
         }
-        stage('Run tests') {
+        stage('Run Tests') {
             steps {
                 sh 'pytest --html=reports/index.html'
             }
