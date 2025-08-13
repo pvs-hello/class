@@ -1,21 +1,39 @@
 pipeline {
     agent any
+
     stages {
         stage('Checkout') {
             steps {
-                git branch:'main',url:'https://github.com/pvs-hello/class.git'
+                // This just uses Jenkins' built-in checkout from SCM
+                checkout scm
             }
         }
+
         stage('Install Dependencies') {
             steps {
-                sh 'pip3 install -r requirements.txt'
+                sh '''
+                    # Create virtual environment
+                    python3 -m venv venv
+                    # Activate it
+                    . venv/bin/activate
+                    # Upgrade pip
+                    pip install --upgrade pip
+                    # Install required packages
+                    pip install -r requirements.txt
+                '''
             }
         }
+
         stage('Run Tests') {
             steps {
-                sh 'pytest --html=reports/index.html'
+                sh '''
+                    # Activate venv and run pytest
+                    . venv/bin/activate
+                    pytest --html=reports/index.html
+                '''
             }
         }
+
         stage('Publish Report') {
             steps {
                 publishHTML(target: [
