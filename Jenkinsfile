@@ -33,7 +33,15 @@ pipeline {
                 '''
             }
         }
-
+        stage('Run python') {
+            steps {
+                echo "before execution"
+                sh '''
+                    python3 -u "/Users/sree/Desktop/class/app.py"
+                '''
+                echo "after execution"
+            }
+        }
         stage('Publish Report') {
             steps {
                 publishHTML(target: [
