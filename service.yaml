@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: html-site-service
+spec:
+  selector:
+    app: html-site
+  ports:
+  - port: 80
+    targetPort: 80
+  type: LoadBalancer

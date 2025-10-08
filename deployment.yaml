@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: html-site-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: html-site
+  template:
+    metadata:
+      labels:
+        app: html-site
+    spec:
+      containers:
+      - name: html-container
+        image: my-html-site
+        imagePullPolicy: Never   # use local image
+        ports:
+        - containerPort: 80
